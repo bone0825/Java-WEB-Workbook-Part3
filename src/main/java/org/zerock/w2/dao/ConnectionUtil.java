@@ -1,4 +1,4 @@
-package org.zerock.jdbcex.dao;
+package org.zerock.w2.dao;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -14,7 +14,7 @@ public enum ConnectionUtil {
     ConnectionUtil()  {
         HikariConfig config = new HikariConfig();
         config.setDriverClassName("org.mariadb.jdbc.Driver");
-        config.setJdbcUrl("jdbc:mariadb://localhost:3306/webdb");
+        config.setJdbcUrl("jdbc:mariadb://localhost:3308/webdb");
         config.setUsername("webuser");
         config.setPassword("webuser");
         config.addDataSourceProperty("cachePrepStmts", "true");

@@ -1,4 +1,4 @@
-package org.zerock.jdbcex.util;
+package org.zerock.w2.util;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;

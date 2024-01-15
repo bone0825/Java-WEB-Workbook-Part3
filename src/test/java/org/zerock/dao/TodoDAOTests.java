@@ -4,9 +4,9 @@ package org.zerock.dao;
 import lombok.Cleanup;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.zerock.jdbcex.dao.ConnectionUtil;
-import org.zerock.jdbcex.dao.TodoDAO;
-import org.zerock.jdbcex.domain.TodoVO;
+import org.zerock.w2.dao.ConnectionUtil;
+import org.zerock.w2.dao.TodoDAO;
+import org.zerock.w2.domain.TodoVO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

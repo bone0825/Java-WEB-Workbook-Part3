@@ -16,7 +16,7 @@ public class ConnectTests {
         Class.forName("org.mariadb.jdbc.Driver");
 
         Connection connection = DriverManager.getConnection(
-                "jdbc:mariadb://localhost:3306/webdb",
+                "jdbc:mariadb://localhost:3308/webdb",
                 "webuser",
                 "webuser");
 
@@ -40,7 +40,7 @@ public class ConnectTests {
 
         HikariConfig config = new HikariConfig();
         config.setDriverClassName("org.mariadb.jdbc.Driver");
-        config.setJdbcUrl("jdbc:mariadb://localhost:3306/webdb");
+        config.setJdbcUrl("jdbc:mariadb://localhost:3308/webdb");
         config.setUsername("webuser");
         config.setPassword("webuser");
         config.addDataSourceProperty("cachePrepStmts", "true");
