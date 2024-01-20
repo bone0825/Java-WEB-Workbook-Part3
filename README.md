@@ -57,3 +57,34 @@ getSession() 메소드로 각각의 JSESSIONID의 공간에 접근하여  정보
 ![img_1.png](img_1.png)
 
 이를 통해 로그인이 필요한 페이지, 한글 처리가 필요한 페이지를 Filter를 통해 일괄적으로 적용함으로서 코드를 간단하게 작성하고 관리할 수 있다.
+
+<br>
+<br>
+
+로그아웃의 경우 로그인을 인증하는 쿠키를 `removeAtrribute()`메서드를 통해 삭제하고 더이상 유효하지 않다고 하여 처리하는 방식을 사용한다.
+
+## EL Scope와 HttpSession
+
+EL을 통해 HttpServletRequeste에 setAttribute()로 저장한 객체를 사용할 수 있다. 또한 HttpServletRequest에 저장된 객체를 찾을 수 없다면 자동으로 HttpSession에 저장된 객체를 찾아내는 방식으로 동작하는데 이를 **EL의 scope**라고 한다. <br>
+<br>
+Scope는 HttpServletRequest나 HttpSession 등에서 setAtrribute()로 되어 있는 데이터를 찾을 때 사용된다.
+
+> ####El의 Scope 종류
+> - Page Scope : JSP에서 EL을 사용해 <c\:set>으로 저장한 변수
+> - Request Scope : HttpServletRequest에 setAttribute()로 저정한 변수
+> - Session Scope : HttpSession을 이용해 setAttribute()로 저장한 변수
+> - Apllication Scope : ServletContext를 이용해 setAtrribute()로 저장한 변수
+
+예로 `${obj}`라고 하면 앞의 스코프들이 page -> request -> session -> application 순서대로 'obj'라는 이름으로 저장된 객체를 찾는 방식으로 동작한다.
+
+> ## 사용자 정의 쿠키
+
+![img_2.png](img_2.png)
+
+사용자 정의 쿠키는 newCookie()로 생성하며 반드시 name/value 가 필요하다. <br>
+이 때 value는 일반적인 문자열로 저장이 불가능하기에 URLEncoding된 문자로 저장해야한다.
+
+### 쿠키 사용하는 경우
+
+쿠키는 서버와 브라우저 사이를 오가기에 보안에 취약하다. 그렇기에 오랜시간 보관해야 하는 데이터는 서버에, 약간의 편의를 제공하기 위한 데이터는 쿠키로 보관하는 방식을 사용한다.<br>
+하지만 모바일에서 시작된 '자동 로그'으로 쿠키의 유효기간을 지정하여 브라우저가 종료되더라도 로그인 정보를 유지하는데 이는 로그인하는 수고로움을 덜어 쿠키의 위상이 변하였다.
