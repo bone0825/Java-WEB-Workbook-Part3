@@ -88,3 +88,36 @@ Scope는 HttpServletRequest나 HttpSession 등에서 setAtrribute()로 되어 �
 
 쿠키는 서버와 브라우저 사이를 오가기에 보안에 취약하다. 그렇기에 오랜시간 보관해야 하는 데이터는 서버에, 약간의 편의를 제공하기 위한 데이터는 쿠키로 보관하는 방식을 사용한다.<br>
 하지만 모바일에서 시작된 '자동 로그'으로 쿠키의 유효기간을 지정하여 브라우저가 종료되더라도 로그인 정보를 유지하는데 이는 로그인하는 수고로움을 덜어 쿠키의 위상이 변하였다.
+
+### 리스너
+
+서블릿 API에서 사용되는 리스너 인터페이스는 Event라는 특정한 데이터가발생하면 자동으로 실행되는 객체들이다.<br>
+주로 '옵저버 패턴'과 같이 쓰인다.
+
+>#### 옵저버 패턴
+> > 특정한 변화(Event)를 **'구독(subscribe)'**하는 객체들을 보관하고 있다가 변화가 발생(publish)하면 구독 객체들을 실행하는 방식이다.
+
+서블릿 API는 여러 이벤트에 맞는 리스너들을 인터페이스로 정의하여 다음과 같은 작업을 처리할 수 있다.
+- 해당 웹 앱이 시작되거나 종료될 때 특정한 작업 수행 (contextInitialized() / contextDestroyed())
+- HttpSession에 특정한 작업에 대한 감시와 처리(Session Listener)
+- HttpServletRequest에 특정한 작업에 대한 감시와 처리
+<br>
+<br>
+> - contextInitialized() / contextDestroyed()
+
+이 때 contextInitialized()/contextDestroyed()는  ServletContextEvent라는 객체가 파라미터로 전달된다.<br>
+이를 이용하면 setAttribute()를 통해 원하는 이름으로 객체를 저장함으로서 현재 애플리케이션이 실행되는 공간인 ServletContext에 접근할 수 있다.<br>
+<br>
+ServletContextListener와 ServletContext를 이용하면 프로젝트가 실행될 때 필요한 객체들을 준비하는 작업을 처리할 수 있다.<br>
+
+- Connection pool 초기화
+- TodoService와 같은 객체 미리 생성해 보관
+
+스프링 프레임워크에서 미리 로딩하는 작업을 처리할 때 ServletContextListener를 사용한다.
+
+> - Session관련 리스너(`HttpSessionListener` / `HttpSessionAttributeListener`)
+
+HttpSession이 생성되거나 setAttribute() 등의 작업이 이루어질 때 이를 감지할 수 있다.<br>
+HttpSessionAttributeListener의 경우 `attributeAdded()`, `attributeRemoved()`, `attributeReplaced()`를 이용해 HttpSession의 `setAttribute()`/`removeAttribute()` 등의 작업을 감지할 수 있다.
+
+
